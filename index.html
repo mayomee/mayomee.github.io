@@ -75,6 +75,13 @@
   .tools { font-size: .85rem; color: var(--muted); }
   .links a { display: block; white-space: nowrap; font-size: .95rem; }
 
+  .job { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; padding: 0 0 1.75rem; }
+  .job:last-child { padding-bottom: 0; }
+  .job .when { color: var(--muted); font-size: .9rem; padding-top: .2rem; }
+  .job h3 { margin: 0; font-size: 1.05rem; }
+  .job .org { color: var(--muted); margin: 0 0 .5rem; font-size: .95rem; }
+  .job ul { margin: 0; padding-left: 1.1rem; color: var(--muted); max-width: 66ch; }
+  .job li { margin-bottom: .3rem; }
   .edu li, .contact li { margin-bottom: .5rem; }
   ul.plain { list-style: none; padding: 0; margin: 0; }
   footer { border-top: 1px solid var(--line); padding: 1.5rem 0 2.5rem; color: var(--muted); font-size: .9rem; }
@@ -82,6 +89,7 @@
   @media (max-width: 760px) {
     .hero { grid-template-columns: 1fr; padding-top: 2.5rem; gap: 2rem; }
     .row { grid-template-columns: 1fr; gap: .4rem; }
+    .job { grid-template-columns: 1fr; gap: .2rem; }
     nav { display: none; }
   }
 </style>
@@ -91,7 +99,7 @@
 <header class="top">
   <div class="wrap">
     <nav aria-label="Navigasi utama">
-      <a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#education">Pendidikan</a><a href="#contact">Kontak</a>
+      <a href="#skills">Skills</a><a href="#experience">Pengalaman</a><a href="#projects">Proyek</a><a href="#education">Pendidikan</a><a href="#contact">Kontak</a>
     </nav>
     <button class="toggle" id="themeBtn" type="button" aria-label="Ganti tema terang atau gelap">Tema gelap</button>
   </div>
@@ -104,6 +112,7 @@
       <p class="lead">[Tulis 2-3 kalimat tentang dirimu: latar belakang, bidang yang kamu uji (web, mobile, API), dan hal yang sedang kamu pelajari, misalnya automation dengan Cypress.]</p>
       <div class="btns">
         <a class="btn primary" href="#projects">Lihat proyek</a>
+        <a class="btn" href="docs/CV_Nama_Kamu.pdf" download>Unduh CV</a>
         <a class="btn" href="https://github.com/mayomee">GitHub</a>
         <a class="btn" href="https://www.linkedin.com/in/[username-linkedin]">LinkedIn</a>
       </div>
@@ -128,6 +137,33 @@
       <div><h3>Pengujian</h3><ul><li>Penyusunan test case</li><li>Skenario positif dan negatif</li><li>Bug report</li><li>API testing</li></ul></div>
       <div><h3>Tools</h3><ul><li>Postman</li><li>Browser DevTools</li><li>GitHub</li><li>[Cypress, Jira, dll.]</li></ul></div>
       <div><h3>Cara kerja</h3><ul><li>Dokumentasi yang jelas</li><li>Analisis penyebab kegagalan</li><li>[tambahkan sendiri]</li></ul></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Pengalaman kerja</h2>
+    <!-- Urutkan dari yang terbaru. Salin satu blok .job untuk menambah pengalaman. Jika belum punya pengalaman kerja formal, isi dengan magang, freelance, atau proyek kampus. -->
+    <div class="job">
+      <div class="when">[Bulan Tahun] - sekarang</div>
+      <div>
+        <h3>[Posisi, misalnya Quality Assurance]</h3>
+        <p class="org">[Nama Perusahaan], [Kota atau Remote], [Full-time / Magang / Freelance]</p>
+        <ul>
+          <li>[Tulis hal yang kamu kerjakan, misalnya: menyusun dan mengeksekusi test case untuk modul X.]</li>
+          <li>[Tulis hasil yang bisa diukur, misalnya: menemukan dan melaporkan N bug sebelum rilis.]</li>
+        </ul>
+      </div>
+    </div>
+    <div class="job">
+      <div class="when">[Bulan Tahun] - [Bulan Tahun]</div>
+      <div>
+        <h3>[Posisi sebelumnya]</h3>
+        <p class="org">[Nama Perusahaan], [Kota atau Remote], [Tipe pekerjaan]</p>
+        <ul>
+          <li>[Tanggung jawab utama.]</li>
+          <li>[Pencapaian atau alat yang dipakai.]</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -175,6 +211,7 @@
   <section id="contact">
     <h2>Kontak</h2>
     <ul class="plain contact">
+      <li>CV: <a href="docs/CV_Nama_Kamu.pdf" download>Unduh CV (PDF)</a></li>
       <li>Email: <a href="mailto:[email-kamu]">[email-kamu]</a></li>
       <li>LinkedIn: <a href="https://www.linkedin.com/in/[username-linkedin]">linkedin.com/in/[username-linkedin]</a></li>
       <li>GitHub: <a href="https://github.com/mayomee">github.com/mayomee</a></li>
