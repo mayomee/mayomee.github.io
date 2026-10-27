@@ -1,1 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Nama Kamu] | QA Portfolio</title>
+<meta name="description" content="Portfolio QA: API testing dengan Postman, dokumen test case, dan bug report.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f8fa; --surface: #ffffff; --ink: #14202b; --muted: #5a6978;
+    --line: #d9dfe6; --accent: #2b5d8c; --accent-ink: #ffffff;
+    --pass-bg: #dff3e6; --pass: #1b6b3a; --fail-bg: #fbe3e1; --fail: #a32b22;
+  }
+  :root[data-theme="dark"] {
+    --bg: #10161c; --surface: #17202a; --ink: #e6ebf0; --muted: #94a3b2;
+    --line: #2a3643; --accent: #86b6e3; --accent-ink: #10161c;
+    --pass-bg: #163a26; --pass: #7fd7a0; --fail-bg: #43201d; --fail: #f19b93;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #10161c; --surface: #17202a; --ink: #e6ebf0; --muted: #94a3b2;
+      --line: #2a3643; --accent: #86b6e3; --accent-ink: #10161c;
+      --pass-bg: #163a26; --pass: #7fd7a0; --fail-bg: #43201d; --fail: #f19b93;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 400 1rem/1.65 "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 1.25rem; }
 
+  header.top { border-bottom: 1px solid var(--line); }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: .9rem; padding-bottom: .9rem; }
+  nav a { margin-right: 1.1rem; color: var(--muted); text-decoration: none; font-size: .95rem; }
+  nav a:hover { color: var(--ink); }
+  .toggle { border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: .4rem .8rem; border-radius: 6px; font: inherit; font-size: .9rem; cursor: pointer; }
+
+  .hero { padding: 4.5rem 0 3.5rem; display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: center; }
+  h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.12; margin: 0 0 1rem; font-weight: 600; letter-spacing: -.02em; }
+  .lead { color: var(--muted); max-width: 52ch; margin: 0 0 1.5rem; }
+  .btns { display: flex; flex-wrap: wrap; gap: .75rem; }
+  .btn { display: inline-block; padding: .6rem 1.1rem; border-radius: 6px; border: 1px solid var(--accent); text-decoration: none; font-weight: 500; }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); }
+
+  .mini { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; font-size: .88rem; }
+  .mini caption { text-align: left; padding: .7rem .9rem; color: var(--muted); border-bottom: 1px solid var(--line); caption-side: top; }
+  .mini table { width: 100%; border-collapse: collapse; }
+  .mini th, .mini td { text-align: left; padding: .55rem .9rem; border-bottom: 1px solid var(--line); }
+  .mini tr:last-child td { border-bottom: 0; }
+  .mini th { color: var(--muted); font-weight: 500; }
+  .id { font-family: "IBM Plex Mono", ui-monospace, Consolas, monospace; font-size: .82rem; }
+  .chip { display: inline-block; padding: .1rem .55rem; border-radius: 999px; font-size: .78rem; font-weight: 600; }
+  .chip.pass { background: var(--pass-bg); color: var(--pass); }
+  .chip.fail { background: var(--fail-bg); color: var(--fail); }
+
+  section { padding: 3rem 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 1.5rem; margin: 0 0 1.5rem; letter-spacing: -.01em; }
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+  .skills h3 { font-size: 1rem; margin: 0 0 .5rem; }
+  .skills ul { margin: 0; padding-left: 1.1rem; color: var(--muted); }
+
+  .proj { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+  .row { display: grid; grid-template-columns: 5.5rem 1fr auto; gap: 1rem; padding: 1.1rem 1.25rem; border-bottom: 1px solid var(--line); align-items: start; }
+  .row:last-child { border-bottom: 0; }
+  .row h3 { margin: 0 0 .25rem; font-size: 1.05rem; }
+  .row p { margin: 0 0 .4rem; color: var(--muted); font-size: .95rem; max-width: 62ch; }
+  .tools { font-size: .85rem; color: var(--muted); }
+  .links a { display: block; white-space: nowrap; font-size: .95rem; }
+
+  .edu li, .contact li { margin-bottom: .5rem; }
+  ul.plain { list-style: none; padding: 0; margin: 0; }
+  footer { border-top: 1px solid var(--line); padding: 1.5rem 0 2.5rem; color: var(--muted); font-size: .9rem; }
+
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; padding-top: 2.5rem; gap: 2rem; }
+    .row { grid-template-columns: 1fr; gap: .4rem; }
+    nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <nav aria-label="Navigasi utama">
+      <a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#education">Pendidikan</a><a href="#contact">Kontak</a>
+    </nav>
+    <button class="toggle" id="themeBtn" type="button" aria-label="Ganti tema terang atau gelap">Tema gelap</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div>
+      <h1>[Nama Kamu], QA Engineer yang menulis test case sampai bisa diulang orang lain.</h1>
+      <p class="lead">[Tulis 2-3 kalimat tentang dirimu: latar belakang, bidang yang kamu uji (web, mobile, API), dan hal yang sedang kamu pelajari, misalnya automation dengan Cypress.]</p>
+      <div class="btns">
+        <a class="btn primary" href="#projects">Lihat proyek</a>
+        <a class="btn" href="https://github.com/mayomee">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/[username-linkedin]">LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="mini">
+      <table>
+        <caption>Contoh baris dari dokumen test case saya</caption>
+        <thead><tr><th>ID</th><th>Skenario</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td class="id">TC-02</td><td>Login gagal dengan password salah</td><td><span class="chip pass">Pass</span></td></tr>
+          <tr><td class="id">TC-24</td><td>Checkout tanpa Postal Code</td><td><span class="chip pass">Pass</span></td></tr>
+          <tr><td class="id">TC-31</td><td>Reset App State mengosongkan keranjang</td><td><span class="chip fail">Fail</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <section id="skills">
+    <h2>Skills dan tools</h2>
+    <div class="skills">
+      <div><h3>Pengujian</h3><ul><li>Penyusunan test case</li><li>Skenario positif dan negatif</li><li>Bug report</li><li>API testing</li></ul></div>
+      <div><h3>Tools</h3><ul><li>Postman</li><li>Browser DevTools</li><li>GitHub</li><li>[Cypress, Jira, dll.]</li></ul></div>
+      <div><h3>Cara kerja</h3><ul><li>Dokumentasi yang jelas</li><li>Analisis penyebab kegagalan</li><li>[tambahkan sendiri]</li></ul></div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Proyek</h2>
+    <div class="proj">
+      <article class="row">
+        <span class="id">API</span>
+        <div>
+          <h3>API Testing dengan Postman</h3>
+          <p>Collection CRUD terhadap mock REST API CrudCrud, dengan test script otomatis, request chaining, dan dokumentasi hasil.</p>
+          <span class="tools">Postman, JavaScript (pm.test)</span>
+        </div>
+        <div class="links"><a href="https://github.com/mayomee/[nama-repo-postman]">Repo GitHub</a><a href="docs/[Portfolio_API_Testing].pdf">Laporan PDF</a></div>
+      </article>
+      <article class="row">
+        <span class="id">TC</span>
+        <div>
+          <h3>Dokumen test case SauceDemo</h3>
+          <p>34 test case untuk login, produk, keranjang, dan checkout pada situs demo e-commerce, lengkap dengan log bug.</p>
+          <span class="tools">Pengujian manual, Chrome DevTools</span>
+        </div>
+        <div class="links"><a href="docs/Dokumen_Test_Case_SauceDemo.pdf">Dokumen PDF</a></div>
+      </article>
+      <article class="row">
+        <span class="id">TC</span>
+        <div>
+          <h3>Test case Find a Doctor</h3>
+          <p>20 test case dan 12 potensi bug untuk alur pencarian dokter dan booking appointment pada website rumah sakit.</p>
+          <span class="tools">Perancangan test case, bug report</span>
+        </div>
+        <div class="links"><a href="docs/Dokumen_Test_Case_Mayapada_Find_a_Doctor.pdf">Dokumen PDF</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Pendidikan</h2>
+    <ul class="plain edu">
+      <li><strong>[Nama Kampus / Sekolah]</strong><br><span class="tools">[Jurusan], [tahun mulai] - [tahun selesai]</span></li>
+      <li><strong>[Bootcamp / Kursus, jika ada]</strong><br><span class="tools">[Bidang], [tahun]</span></li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Kontak</h2>
+    <ul class="plain contact">
+      <li>Email: <a href="mailto:[email-kamu]">[email-kamu]</a></li>
+      <li>LinkedIn: <a href="https://www.linkedin.com/in/[username-linkedin]">linkedin.com/in/[username-linkedin]</a></li>
+      <li>GitHub: <a href="https://github.com/mayomee">github.com/mayomee</a></li>
+    </ul>
+  </section>
+</main>
+
+<footer><div class="wrap">&copy; <span id="yr"></span> [Nama Kamu]</div></footer>
+
+<script>
+  (function () {
+    var root = document.documentElement, btn = document.getElementById('themeBtn');
+    document.getElementById('yr').textContent = new Date().getFullYear();
+    function current() {
+      var t = root.getAttribute('data-theme');
+      if (t) return t;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    function label() { btn.textContent = current() === 'dark' ? 'Tema terang' : 'Tema gelap'; }
+    try { var saved = localStorage.getItem('theme'); if (saved) root.setAttribute('data-theme', saved); } catch (e) {}
+    label();
+    btn.addEventListener('click', function () {
+      var next = current() === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      label();
+    });
+  })();
+</script>
+</body>
+</html>
